@@ -12,7 +12,7 @@
     "build": "lerna run build --stream --ignore @ipfinder/frontend*",
     "seed:backend": "lerna exec --stream --scope=@ipfinder/backend -- yarn seed",
     "start:backend": "lerna exec --stream --scope=@ipfinder/backend -- yarn start",
-    "start:frontend": "lerna exec --stream --scope=@ipfinder/frontend -- yarn start",
+    "start:frontend": "lerna exec --stream --scope=@ipfinder/frontend -- yarn start", 
     "start": "DEBUG=todolist:* concurrently \"yarn start:frontend\" \"yarn start:backend\""
   },
   "devDependencies": {
