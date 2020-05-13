@@ -24,6 +24,15 @@ services:
     volumes:
       - ./deploy/certs:/deploy/certs
 
+  frontend:
+    image: base
+    command: >
+      sh -c 'npm run build:frontend && npm run start:frontend'
+    restart: always
+    env_file: ${ENV_FILE}
+    volumes:
+      - ./deploy/certs:/deploy/certs
+
   nginx:
     image: nginx:latest
     volumes:
