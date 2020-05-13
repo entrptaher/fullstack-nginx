@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -yq build-essential dumb-init
 WORKDIR /app
 
 # dashboard
-# COPY  ./packages/dashboard/package.json ./packages/dashboard/package.json
+COPY  ./packages/frontend/package.json ./packages/frontend/package.json
 
 #  backend
 COPY  ./packages/backend/package.json ./packages/backend/package.json

@@ -12,6 +12,11 @@ const environmentVariables = {
 };
 
 module.exports = {
+  mode: "development",
+  devServer: {
+    host: '0.0.0.0',
+    port: 8080,
+  },
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -24,9 +29,6 @@ module.exports = {
       { test: /\.css$/, use: ["style-loader", "css-loader"] },
     ],
   },
-
-  mode: "development",
-
   plugins: [
     new HtmlWebpackPlugin({
       template: "src/index.html",

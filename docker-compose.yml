@@ -11,11 +11,14 @@ services:
     image: base
     env_file: ${ENV_FILE}
     build: .
+
   backend:
     image: base
     command: >
-      sh -c "npm run deploy:backend && npm run start:backend" 
+      sh -c "npm run build:backend && npm run deploy:backend && npm run start:backend" 
     env_file: ${ENV_FILE}
+    expose: 
+      - 4001
     ports:
       - '4001:4001'
     depends_on:
@@ -27,8 +30,10 @@ services:
   frontend:
     image: base
     command: >
-      sh -c 'npm run build:frontend && npm run start:frontend'
+      sh -c 'npm run start:frontend'
     restart: always
+    ports:
+      - '8080:8080'
     env_file: ${ENV_FILE}
     volumes:
       - ./deploy/certs:/deploy/certs
@@ -38,9 +43,12 @@ services:
     volumes:
       - ./deploy/certs:/deploy/certs
       - ./deploy/nginx/conf.d:/etc/nginx/conf.d
+      - ./deploy/nginx/proxy.conf:/etc/nginx/proxy.conf
     ports:
       - 80:80/tcp
       - 443:443/tcp
+    links:
+      - backend
     depends_on:
       - backend
     restart: always
